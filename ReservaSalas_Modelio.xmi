@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schemas.omg.org/spec/XMI/2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1">
+  <uml:Model xmi:id="model_1" name="PolleriaPedidos">
+    <packagedElement xmi:type="uml:Activity" xmi:id="act_atender" name="Atender pedido">
+
+      <node xmi:type="uml:InitialNode" xmi:id="init" name="Inicio" outgoing="e1"/>
+
+      <node xmi:type="uml:OpaqueAction" xmi:id="a1" name="Registrar pedido [RF-01]" incoming="e1" outgoing="e2"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="a2" name="Verificar stock [RF-02]" incoming="e2" outgoing="e3"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="d1" name="¿Stock suficiente?" incoming="e3" outgoing="e4 e5"/>
+
+      <node xmi:type="uml:OpaqueAction" xmi:id="a3" name="Notificar faltante y ofrecer alternativa [RF-03]" incoming="e4" outgoing="e6"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="a4" name="Calcular total y emitir comprobante [RF-04]" incoming="e5" outgoing="e7"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="a5" name="Descontar insumos [RF-07]" incoming="e7" outgoing="e8"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="a6" name="Enviar comanda a cocina [RF-05]" incoming="e8" outgoing="e9"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="d2" name="¿Es delivery?" incoming="e9" outgoing="e10 e11"/>
+
+      <node xmi:type="uml:OpaqueAction" xmi:id="a7" name="Asignar repartidor y dirección [RF-06]" incoming="e10" outgoing="e12"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="a8" name="Entregar en local" incoming="e11" outgoing="e13"/>
+
+      <node xmi:type="uml:ActivityFinalNode" xmi:id="f1" name="Fin" incoming="e6 e12 e13"/>
+
+      <edge xmi:type="uml:ControlFlow" xmi:id="e1" source="init" target="a1"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e2" source="a1" target="a2"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e3" source="a2" target="d1"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e4" name="No" source="d1" target="a3"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e5" name="Sí" source="d1" target="a4"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e6" source="a3" target="f1"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e7" source="a4" target="a5"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e8" source="a5" target="a6"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e9" source="a6" target="d2"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e10" name="Sí" source="d2" target="a7"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e11" name="No" source="d2" target="a8"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e12" source="a7" target="f1"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="e13" source="a8" target="f1"/>
+    </packagedElement>
+  </uml:Model>
+</xmi:XMI>
